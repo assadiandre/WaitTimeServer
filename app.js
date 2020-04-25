@@ -66,9 +66,16 @@ app.get("/", function (req, res) {
     // convert data1 to { "id": "ChIJCYYAFMV9hYARmJORQa4TX58", "name": "Safeway" } format
     //Data = JSON.stringify(data1)
     Data = data1.replace(/'/g,'"');
-    res.render("home", { dataejs: Data});
-    
+    res.render("home", {dataejs: Data}); 
 });
+
+app.get("/time", function (req, res) {
+    var time = {
+      time: "30",
+    };
+    Time = JSON.stringify(time);
+    res.render("time", {timeejs: Time});
+})
 
 
 app.listen(3000, function () {
