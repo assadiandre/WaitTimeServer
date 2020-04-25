@@ -5,12 +5,24 @@ const bodyParser = require("body-parser");
 const ejs = require("ejs");
 const mongoose = require("mongoose");
 
-
+const spawn = require("child_process").spawn;
+const process = spawn('python',["main.py"]);
 const app = express();
+var util = require("util");
+
 
 app.set("view engine", "ejs");
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(express.static("public"));
+
+util.log('readingin')
+
+process.stdout.on('data',function(chunk){
+
+    var textChunk = chunk.toString('utf8');// buffer to string
+
+    util.log(textChunk);
+});
 
 
 // // basic mongo db stuff
@@ -33,9 +45,6 @@ app.get("/", function (req, res) {
     res.render("home", {});
     
 });
-
-
-
 
 
 app.listen(3000, function () {
