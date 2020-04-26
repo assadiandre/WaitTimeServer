@@ -23,10 +23,11 @@ app.get("/", function (req, res) { 
         data1 = chunk.toString('utf8');// buffer to string
         if (data1 != null) {
             Data = data1.replace(/'/g,'"');     
-            res.render("home", {dataejs: Data}); 
+            Data = JSON.parse(Data);
+            res.json(Data); 
         } else {
-            var testData =  {hello:"hello"};
-            res.render("home", {dataejs: Data}); 
+            Data = JSON.parse("Error");
+            res.json(Data); 
         }   
     });    
     // convert data1 to { "id": "ChIJCYYAFMV9hYARmJORQa4TX58", "name": "Safeway" } format     
@@ -38,7 +39,8 @@ app.get("/time", function (req, res) {
       time: "30",
     };
     Time = JSON.stringify(time);
-    res.render("time", {timeejs: Time});
+    Time = JSON.parse(Time)
+    res.json( Time );
 })
 
 app.listen(process.env.PORT|| 3000, function() {
