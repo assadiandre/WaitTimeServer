@@ -9,7 +9,6 @@ var { PythonShell } = "python-shell";
 const spawn = require("child_process").spawn;
 var util = require("util");
 
-var util = require("util");
 var data1
 
 app.set("view engine", "ejs");
