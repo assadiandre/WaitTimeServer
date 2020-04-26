@@ -6,9 +6,10 @@ const ejs = require("ejs");
 const mongoose = require("mongoose");
 
 const spawn = require("child_process").spawn;
-const process = spawn('python',["main.py"]);
+const process = spawn('python3',["main.py"]);
 const app = express();
 var util = require("util");
+port = process.env.PORT || 80
 
 
 app.set("view engine", "ejs");
@@ -18,11 +19,25 @@ app.use(express.static("public"));
 util.log('readingin')
 
 process.stdout.on('data',function(chunk){
-
+	console.log(chunk);
     var textChunk = chunk.toString('utf8');// buffer to string
-    console.log(textChunk)
-    util.log(textChunk);
+});    
+
+app.get("/populartimesid", function (req, res, next) {
+
+
 });
+
+app.get("/", function (req, res) {
+    res.render("home", {});
+    
+});
+
+
+app.listen(port, function () {
+    console.log("Server started on port 3000");
+});
+
 
 
 // // basic mongo db stuff
@@ -40,13 +55,3 @@ process.stdout.on('data',function(chunk){
 
 // const Data = mongoose.model("Data", articleSchema); // model
 // // Basic ends
-
-app.get("/", function (req, res) {
-    res.render("home", {});
-    
-});
-
-
-app.listen(3000, function () {
-    console.log("Server started on port 3000");
-});

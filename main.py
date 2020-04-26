@@ -1,7 +1,7 @@
 import populartimes
 import sys 
 
-#data = populartimes.get_id( "AIzaSyBb10HJkDvVvJQThvtmulz7gkrzQJCrZAA", "ChIJCYYAFMV9hYARmJORQa4TX58" ) 
+data = populartimes.get_id( "AIzaSyBb10HJkDvVvJQThvtmulz7gkrzQJCrZAA", "ChIJCYYAFMV9hYARmJORQa4TX58" ) 
 
 print("hello")
 
