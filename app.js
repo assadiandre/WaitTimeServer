@@ -9,7 +9,7 @@ const app = express();
 var { PythonShell } = "python-shell";
 
 const spawn = require("child_process").spawn;
-const processSpawn = spawn('python3',["main.py"]);
+const processSpawn = spawn('python3',["./main.py"]);
 var util = require("util");
 
 var util = require("util");
@@ -28,9 +28,14 @@ processSpawn.stdout.on('data',function(chunk){
 
 app.get("/", function (req, res) {     
     // convert data1 to { "id": "ChIJCYYAFMV9hYARmJORQa4TX58", "name": "Safeway" } format     
-    //Data = JSON.stringify(data1)     
-    Data = data1.replace(/'/g,'"');     
-    res.render("home", {dataejs: Data});  
+    //Data = JSON.stringify(data1) 
+    if (data1 != nil) {
+        Data = data1.replace(/'/g,'"');     
+        res.render("home", {dataejs: Data});  
+    } else {
+        res.render("home", {"hello"})
+    }   
+
 });
 
 app.get("/time", function (req, res) {
