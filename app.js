@@ -23,7 +23,7 @@ app.get("/", function (req, res) { 
         data1 = chunk.toString('utf8');// buffer to string
         if (data1 != null) {
             Data = data1.replace(/'/g,'"');     
-            res.render("" Data );  
+            res.render("home", {dataejs: Data}); 
         } else {
             var testData =  {hello:"hello"};
             res.render("home", {dataejs: Data}); 
