@@ -9,9 +9,8 @@ const app = express();
 var { PythonShell } = "python-shell";
 
 const spawn = require("child_process").spawn;
-const process = spawn('python3',["main.py"]);
+const processSpawn = spawn('python3',["main.py"]);
 var util = require("util");
-const port = process.env.PORT || 3000
 
 var util = require("util");
 var data1
@@ -22,7 +21,7 @@ app.use(express.static("public"));
 
 util.log('readingin')
 
-process.stdout.on('data',function(chunk){
+processSpawn.stdout.on('data',function(chunk){
     data1 = chunk.toString('utf8');// buffer to string
 });    
 
@@ -43,7 +42,7 @@ app.get("/time", function (req, res) {
 })
 
 
-app.listen(port, function() {
+app.listen(process.env.PORT|| 8888, function() {
     console.log("Server started on port 3000");
 });
 
