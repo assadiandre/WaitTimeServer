@@ -33,7 +33,8 @@ app.get("/", function (req, res) { 
         Data = data1.replace(/'/g,'"');     
         res.render("home", {dataejs: Data});  
     } else {
-        res.render("home", {dataejs: {"hello"}})
+        var testData =  {hello:"hello"};
+        res.render("home", {dataejs: testData})
     }   
 
 });
