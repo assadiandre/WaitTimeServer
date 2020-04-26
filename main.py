@@ -1,7 +1,8 @@
 import populartimes
 import sys 
 
-data = populartimes.get_id( "AIzaSyBb10HJkDvVvJQThvtmulz7gkrzQJCrZAA", "ChIJCYYAFMV9hYARmJORQa4TX58" ) 
+placeid = str(sys.argv[1])
+data = populartimes.get_id( "AIzaSyBb10HJkDvVvJQThvtmulz7gkrzQJCrZAA", placeid ) 
 
 
 print(data)

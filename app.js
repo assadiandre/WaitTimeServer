@@ -17,8 +17,9 @@ app.use(express.static("public"));
 
 util.log('readingin')
 
-app.get("/", function (req, res) {     
-    var processSpawn = spawn('python',["./main.py"]);
+app.get("/:placeid", function (req, res) {     
+    var placeid = req.params.placeid
+    var processSpawn = spawn('python',["./main.py",placeid]);
     processSpawn.stdout.on('data',function(chunk){
         data1 = chunk.toString('utf8');// buffer to string
         if (data1 != null) {
@@ -30,8 +31,22 @@ app.get("/", function (req, res) { 
             res.json(Data); 
         }   
     });    
-    // convert data1 to { "id": "ChIJCYYAFMV9hYARmJORQa4TX58", "name": "Safeway" } format     
-    //Data = JSON.stringify(data1) 
+});
+
+app.get("/", function (req, res) {     
+    var processSpawn = spawn('python',["./main.py","ChIJCYYAFMV9hYARmJORQa4TX58" ]);
+    processSpawn.stdout.on('data',function(chunk){
+        data1 = chunk.toString('utf8');// buffer to string
+        if (data1 != null) {
+            console.log(data1)
+            Data = data1.replace(/'/g,'"');     
+            Data = JSON.parse(Data);
+            res.json(Data); 
+        } else {
+            Data = JSON.parse("Error");
+            res.json(Data); 
+        }   
+    });    
 });
 
 app.get("/time", function (req, res) {
