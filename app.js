@@ -7,7 +7,6 @@ const app = express();
 var { PythonShell } = "python-shell";
 
 const spawn = require("child_process").spawn;
-const processSpawn = spawn('python3',["./main.py"]);
 var util = require("util");
 
 var util = require("util");
@@ -19,22 +18,20 @@ app.use(express.static("public"));
 
 util.log('readingin')
 
-processSpawn.stdout.on('data',function(chunk){
-    data1 = chunk.toString('utf8');// buffer to string
-});    
-
-
 app.get("/", function (req, res) {     
+    var processSpawn = spawn('python',["./main.py"]);
+    processSpawn.stdout.on('data',function(chunk){
+        data1 = chunk.toString('utf8');// buffer to string
+        if (data1 != null) {
+            Data = data1.replace(/'/g,'"');     
+            res.render("home", {dataejs: Data});  
+        } else {
+            var testData =  {hello:"hello"};
+            res.render("home", {dataejs: testData})
+        }   
+    });    
     // convert data1 to { "id": "ChIJCYYAFMV9hYARmJORQa4TX58", "name": "Safeway" } format     
     //Data = JSON.stringify(data1) 
-    if (data1 != null) {
-        Data = data1.replace(/'/g,'"');     
-        res.render("home", {dataejs: Data});  
-    } else {
-        var testData =  {hello:"hello"};
-        res.render("home", {dataejs: testData})
-    }   
-
 });
 
 app.get("/time", function (req, res) {
@@ -45,7 +42,7 @@ app.get("/time", function (req, res) {
     res.render("time", {timeejs: Time});
 })
 
-app.listen(process.env.PORT|| 8888, function() {
+app.listen(process.env.PORT|| 3000, function() {
     console.log("Server started on port 3000");
 });
 
