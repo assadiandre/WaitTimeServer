@@ -1,5 +1,3 @@
-// Basic for backend
-
 const express = require("express");
 const bodyParser = require("body-parser");
 const ejs = require("ejs");
@@ -47,10 +45,10 @@ app.get("/time", function (req, res) {
     res.render("time", {timeejs: Time});
 })
 
-
 app.listen(process.env.PORT|| 8888, function() {
     console.log("Server started on port 3000");
 });
+
 
 
 
