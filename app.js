@@ -29,7 +29,7 @@ processSpawn.stdout.on('data',function(chunk){
 app.get("/", function (req, res) {     
     // convert data1 to { "id": "ChIJCYYAFMV9hYARmJORQa4TX58", "name": "Safeway" } format     
     //Data = JSON.stringify(data1) 
-    if (data1 != nil) {
+    if (data1 != null) {
         Data = data1.replace(/'/g,'"');     
         res.render("home", {dataejs: Data});  
     } else {
